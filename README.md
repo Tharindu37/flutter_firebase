@@ -60,3 +60,16 @@ class MyApp extends StatelessWidget{
 }
 ```
 8. Run App
+
+
+### Update Flutter Versions
+```
+flutter --version
+```
+```
+flutter upgrade
+```
+### Create Flutter project
+```
+flutter create test_app
+```

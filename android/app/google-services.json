@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1053095993905:android:ce3b0ef66c224ae0316b10",
         "android_client_info": {
-          "package_name": "com.tharindu.app"
+          "package_name": "com.example.flutter_firebase"
         }
       },
       "oauth_client": [],
