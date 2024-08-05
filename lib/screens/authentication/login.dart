@@ -20,7 +20,7 @@ class _Sign_InState extends State<Sign_In> {
         child: const Text("Sign in Anonymously"),
         onPressed: () async {
           dynamic result = await _auth.signInAnonymously();
-          print(result);
+          print(result.uid);
           if (result == null) {
             print("Error in sign in anon");
           } else {
