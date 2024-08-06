@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/constants/colors.dart';
+import 'package:flutter_firebase/constants/description.dart';
 import 'package:flutter_firebase/services/auth.dart';
 
 class Home extends StatefulWidget {
@@ -38,6 +40,20 @@ class _HomeState extends State<Home> {
               },
             ),
           ],
+        ),
+        body: const Padding(
+          padding: const EdgeInsets.all(20),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  "Hello Flutter App",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Text(description)
+              ],
+            ),
+          ),
         ),
       ),
     );
