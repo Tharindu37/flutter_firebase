@@ -5,7 +5,9 @@ import 'package:flutter_firebase/constants/styles.dart';
 import 'package:flutter_firebase/services/auth.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+  // function
+  final Function toggle;
+  const Register({super.key, required this.toggle});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -21,6 +23,7 @@ class _RegisterState extends State<Register> {
   // email password status
   String email = "";
   String password = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,7 @@ class _RegisterState extends State<Register> {
                         ),
                         // password
                         TextFormField(
+                          obscureText: true,
                           decoration: textInputDecoration.copyWith(
                               hintText: "Password"),
                           validator: (value) => value!.length < 6
@@ -83,6 +87,11 @@ class _RegisterState extends State<Register> {
                         // google
                         const SizedBox(
                           height: 20,
+                        ),
+                        // error text
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red),
                         ),
                         const Text(
                           "Login with social accounts",
@@ -112,6 +121,7 @@ class _RegisterState extends State<Register> {
                               GestureDetector(
                                 onTap: () {
                                   // go to the Register page
+                                  widget.toggle();
                                 },
                                 child: const Text(
                                   "Login",
@@ -121,8 +131,16 @@ class _RegisterState extends State<Register> {
                             ]),
                         // button
                         GestureDetector(
-                          onTap: () {
-                            // login
+                          onTap: () async {
+                            // register
+                            dynamic result = await _auth
+                                .registerWithEmailAndPassword(email, password);
+                            if (result == null) {
+                              // error
+                              setState(() {
+                                error = "please enter a valid email";
+                              });
+                            }
                           },
                           child: Container(
                             height: 40,

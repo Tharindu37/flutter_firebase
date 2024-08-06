@@ -7,8 +7,9 @@ import 'package:flutter_firebase/constants/styles.dart';
 import 'package:flutter_firebase/services/auth.dart';
 
 class Sign_In extends StatefulWidget {
-  const Sign_In({super.key});
-
+  // function
+  final Function toggle;
+  const Sign_In({super.key, required this.toggle});
   @override
   State<Sign_In> createState() => _Sign_InState();
 }
@@ -23,6 +24,7 @@ class _Sign_InState extends State<Sign_In> {
   // email password status
   String email = "";
   String password = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +73,7 @@ class _Sign_InState extends State<Sign_In> {
                         ),
                         // password
                         TextFormField(
+                          obscureText: true,
                           decoration: textInputDecoration.copyWith(
                               hintText: "Password"),
                           validator: (value) => value!.length < 6
@@ -85,6 +88,10 @@ class _Sign_InState extends State<Sign_In> {
                         // google
                         const SizedBox(
                           height: 20,
+                        ),
+                        Text(
+                          error,
+                          style: TextStyle(color: Colors.red),
                         ),
                         const Text(
                           "Login with social accounts",
@@ -114,6 +121,7 @@ class _Sign_InState extends State<Sign_In> {
                               GestureDetector(
                                 onTap: () {
                                   // go to the Register page
+                                  widget.toggle();
                                 },
                                 child: const Text(
                                   "Register",
@@ -123,8 +131,16 @@ class _Sign_InState extends State<Sign_In> {
                             ]),
                         // button
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             // login
+                            dynamic result = await _auth
+                                .signInUsingEmailAndPassword(email, password);
+                            if (result == null) {
+                              setState(() {
+                                error =
+                                    "Could not signin with those credentials";
+                              });
+                            }
                           },
                           child: Container(
                             height: 40,
