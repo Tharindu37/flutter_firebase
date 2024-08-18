@@ -26,7 +26,10 @@ npm install -g firebase-tools
 dart pub global activate flutterfire_cli
 ```
 4. Create a Flutter Project
-5. Create a new Firebase project
+```
+flutter create my_app
+```
+6. Create a new Firebase project
 ```
 firebase login
 ```
